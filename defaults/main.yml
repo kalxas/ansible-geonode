@@ -123,3 +123,4 @@ ssh_dir: ~/.ssh/
 
 apache: false
 osgeo_importer: false
+letsencrypt: false

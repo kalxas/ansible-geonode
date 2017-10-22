@@ -4,6 +4,8 @@
 #
 ---
 
+- include: letsencrypt.yml
+  when: letsencrypt
 - include: nginx.yml
   when: not apache
 - include: uwsgi.yml
