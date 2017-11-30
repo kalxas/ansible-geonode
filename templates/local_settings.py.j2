@@ -1,7 +1,9 @@
 import os
+import geonode
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
+SITENAME = '{{app_name}}'
 SITEURL = "http://{{server_name}}"
 
 DATABASES = {
@@ -54,3 +56,54 @@ CATALOGUE = {
 
 MEDIA_ROOT = "/var/www/{{ app_name }}/uploaded"
 STATIC_ROOT = "/var/www/{{ app_name }}/static"
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', ['localhost','{{server_name}}'])
+
+# GOOGLE_API_KEY = ''
+
+GEONODE_ROOT = os.path.dirname(geonode.__file__)
+
+TEMPLATE_DIRS = (
+    os.path.join(PROJECT_ROOT, 'templates'),
+    os.path.join(GEONODE_ROOT, 'templates'),
+
+)
+
+# Additional directories which hold static files
+STATICFILES_DIRS = [
+    os.path.join(PROJECT_ROOT, 'static'),
+    os.path.join(GEONODE_ROOT, 'static'),
+
+]
+
+REGISTRATION_OPEN = True
+ACCOUNT_APPROVAL_REQUIRED = False
+
+ACCOUNT_EMAIL_CONFIRMATION_EMAIL = True
+ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True
+
+# Allowed values for the preview library are 'geoext' and 'leaflet'.
+LAYER_PREVIEW_LIBRARY = 'geoext'
+NOTIFICATION_LANGUAGE_MODULE = "account.Account"
+
+# Uncomment the following to receive emails whenever there are errors in GeoNode
+# or to be notified of new user requests when ACCOUNT_APPROVAL_REQUIRED has been set.
+ADMINS = (
+          ('admin', 'thessgeonode@gmail.com'),
+        )
+
+# Uncomment the following to use a Gmail account as the email backend
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'thessgeonode@gmail.com'
+EMAIL_HOST_PASSWORD = '<password>'
+EMAIL_PORT = 587
+
+# Email for users to contact admins.
+THEME_ACCOUNT_CONTACT_EMAIL = 'thessgeonode@gmail.com'
+
+# Bit.ly
+ZINNIA_URL_SHORTENER_BACKEND = 'zinnia_bitly'
+
+BITLY_LOGIN = 'thessgeonode'
+BITLY_API_KEY = '<api-key>'
